@@ -18,6 +18,6 @@
     "composer/installers": "^1.4",
     "wpackagist-plugin/woocommerce":"4.5.2",
     "wpackagist-plugin/yikes-inc-easy-custom-woocommerce-product-tabs": "1.7.6",
-    "koodimonni-plugin-language/woocommerce-it_it": "4.6.0"
+    "koodimonni-plugin-language/woocommerce-it_it": "4.8.0"
   }
 }
