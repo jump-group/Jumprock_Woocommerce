@@ -16,7 +16,7 @@
   "require": {
     "php": ">=7.4",
     "wpackagist-plugin/woocommerce":"^6.5",
-    "wpackagist-plugin/yikes-inc-easy-custom-woocommerce-product-tabs": "1.7.7",
+    "wpackagist-plugin/yikes-inc-easy-custom-woocommerce-product-tabs": "^1",
     "koodimonni-plugin-language/woocommerce-it_it": "^6.5",
     "wpackagist-plugin/duracelltomi-google-tag-manager":"^1"
   }
