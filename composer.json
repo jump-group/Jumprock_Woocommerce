@@ -19,5 +19,10 @@
     "wpackagist-plugin/yikes-inc-easy-custom-woocommerce-product-tabs": "^1",
     "koodimonni-plugin-language/woocommerce-it_it": "^7.0",
     "wpackagist-plugin/duracelltomi-google-tag-manager":"^1"
+  },
+  "autoload": {
+    "psr-4": {
+      "JumpGroup\\Woocommerce\\": "src/"
+    }
   }
 }
