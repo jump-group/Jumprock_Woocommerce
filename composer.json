@@ -1,6 +1,6 @@
 {
   "name": "jumprock_packages/woocommerce",
-  "type": "metapackage",
+  "type": "wordpress-muplugin",
   "description": "Bundle of Woocommerce Depencies for every WP project",
   "homepage": "http://jumpgroup.it",
   "repositories": [
