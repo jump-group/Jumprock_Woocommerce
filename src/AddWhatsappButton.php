@@ -13,8 +13,25 @@ class AddWhatsappButton
             // Create ACF for buttons data
             add_action('acf/init', 'createAcf');
             // Definizione shortcode per il pulsante di whatsapp
-            add_shortcode('jump_whatsapp_button', 'whatsapp_button_shortcode');
+            add_shortcode('jump_whatsapp_button', [self::class, 'whatsapp_button_shortcode']);
         });
+    }
+
+    public static function whatsapp_button_shortcode()
+    {
+        global $post;
+        $btn_whatsapp = get_field('whatsapp_button', 'options');
+
+        // Build the WhatsApp button HTML code
+        $whatsapp_button = '';
+        if ($btn_whatsapp['phone'] && $btn_whatsapp['img']) {
+            $whatsapp_button .= '<div class="Whatsapp">';
+            $whatsapp_button .= '<div class="Whatsapp__Avatar"><img src="' . $btn_whatsapp['img'] . '"></div>';
+            $whatsapp_button .= '<a target="_blank" href="https://api.whatsapp.com/send?phone=' . $btn_whatsapp['phone'] . '&text=' . $btn_whatsapp['link_text'] . ' ' . $post->post_title . '" id="whatsapp_button" class="Whatsapp__Btn">' . $btn_whatsapp['btn_text'] . '</a>';
+            $whatsapp_button .= '</div>';
+        }
+
+        return $whatsapp_button;
     }
 }
 
@@ -63,25 +80,3 @@ function createAcf()
         ));
     endif;
 }
-
-function whatsapp_button_shortcode()
-{
-    global $post;
-
-    // $fields = get_fields();
-    // var_dump($fields);die();
-
-    $btn_whatsapp = get_field('whatsapp_button', 'options');
-
-    // Build the WhatsApp button HTML code
-    $whatsapp_button = '';
-    if ($btn_whatsapp['phone'] && $btn_whatsapp['img']) {
-        $whatsapp_button .= '<div class="Whatsapp">';
-        $whatsapp_button .= '<div class="Whatsapp__Avatar"><img src="' . $btn_whatsapp['img'] . '"></div>';
-        $whatsapp_button .= '<a target="_blank" href="https://api.whatsapp.com/send?phone=' . $btn_whatsapp['phone'] . '&text=' . $btn_whatsapp['link_text'] . ' ' . $post->post_title . '" id="whatsapp_button" class="Whatsapp__Btn">' . $btn_whatsapp['btn_text'] . '</a>';
-        $whatsapp_button .= '</div>';
-    }
-
-    return $whatsapp_button;
-}
-add_shortcode('jump_whatsapp_button', 'whatsapp_button_shortcode');
