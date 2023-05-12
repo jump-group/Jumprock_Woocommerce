@@ -3,7 +3,7 @@
 namespace JumpGroup\Woocommerce;
 use function Env\env;
 
-class InvertedCheckout{
+class InvertedCheckoutBilling{
     
     public static function init() {
        // Code here

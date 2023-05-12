@@ -10,7 +10,9 @@ License:      MIT License
 
 namespace JumpGroup\Woocommerce;
 use function Env\env;
-use JumpGroup\Woocommerce\InvertCheckout;
+use JumpGroup\Woocommerce\AddOptionPage;
+use JumpGroup\Woocommerce\AddWhatsappButton;
+use JumpGroup\Woocommerce\InvertCheckoutBilling;
 
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -28,7 +30,9 @@ class Init{
     }
 
     protected function __construct(){
-      InvertCheckout::init();
+      AddOptionPage::init();
+      AddWhatsappButton::init();
+      InvertCheckoutBilling::init();
     }
 }
 
