@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name:  Mandatory plugins
+Plugin Name:  Woocommerce plugins
 Plugin URI:   https://jumpgroup.it/
-Description:  Adds Configs for Image Handling
+Description:  Adds Woocommerce plugins and improvements
 Version:      1.1.0
 Author:       Jump Group
 License:      MIT License
