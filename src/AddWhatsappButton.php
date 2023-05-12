@@ -25,7 +25,7 @@ class AddWhatsappButton
         if ($wts_phone && $wts_image) {
             $whatsapp_button .= '<div class="Whatsapp">';
             $whatsapp_button .= '<div class="Whatsapp__Avatar"><img src="' . $wts_image . '"></div>';
-            $whatsapp_button .= '<a target="_blank" href="https://api.whatsapp.com/send?phone=' . $wts_phone . '&text=' . $wts_link_text . ' ' . $post->post_title . '" id="whatsapp_button" class="Whatsapp__Btn">' . $wts_btn_text . '</a>';
+            $whatsapp_button .= '<a class="Whatsapp__Btn" target="_blank" href="https://api.whatsapp.com/send?phone=' . $wts_phone . '&text=' . $wts_link_text . ' ' . $post->post_title . '" id="whatsapp_button">' . $wts_btn_text . '</a>';
             $whatsapp_button .= '</div>';
         }
         return $whatsapp_button;
