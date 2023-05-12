@@ -6,15 +6,10 @@ use function Env\env;
 
 class AddWhatsappButton
 {
-
     public static function init()
     {
-        add_action('init', function () {
-            // Create ACF for buttons data
-            add_action('acf/init', 'createAcf');
-            // Definizione shortcode per il pulsante di whatsapp
-            add_shortcode('jump_whatsapp_button', [self::class, 'whatsapp_button_shortcode']);
-        });
+        add_action('acf/init', [self::class, 'createAcf']);
+        add_shortcode('jump_whatsapp_button', [self::class, 'whatsapp_button_shortcode']);
     }
 
     public static function whatsapp_button_shortcode()
@@ -33,50 +28,52 @@ class AddWhatsappButton
 
         return $whatsapp_button;
     }
-}
 
-function createAcf()
-{
-    if (function_exists('acf_add_local_field_group')) :
-        acf_add_local_field_group(array(
-            'key' => 'whatsapp_button',
-            'title' => 'Pulsante Whatsapp',
-            'fields' => array(
-                array(
-                    'key' => 'field_phone',
-                    'label' => 'Numero di telefono',
-                    'name' => 'phone',
-                    'type' => 'number',
-                ),
-                array(
-                    'key' => 'field_link_text',
-                    'label' => 'Testo link',
-                    'name' => 'link_text',
-                    'type' => 'text',
-                ),
-                array(
-                    'key' => 'field_btn_text',
-                    'label' => 'Testo bottone',
-                    'name' => 'btn_text',
-                    'type' => 'text',
-                ),
-                array(
-                    'key' => 'field_image',
-                    'label' => 'Immagine',
-                    'name' => 'img',
-                    'type' => 'image',
-                    'return_format' => 'url',
-                ),
-            ),
-            'location' => array(
-                array(
+    public static function createAcf()
+    {
+        if (function_exists('acf_add_local_field_group')) :
+            acf_add_local_field_group(array(
+                'key' => 'whatsapp_button',
+                'title' => 'Pulsante Whatsapp',
+                'fields' => array(
                     array(
-                        'param' => 'options_page',
-                        'operator' => '==',
-                        'value' => 'woocommerce-elements-config',
+                        'key' => 'field_phone',
+                        'label' => 'Numero di telefono',
+                        'name' => 'phone',
+                        'type' => 'number',
+                    ),
+                    array(
+                        'key' => 'field_link_text',
+                        'label' => 'Testo link',
+                        'name' => 'link_text',
+                        'type' => 'text',
+                    ),
+                    array(
+                        'key' => 'field_btn_text',
+                        'label' => 'Testo bottone',
+                        'name' => 'btn_text',
+                        'type' => 'text',
+                    ),
+                    array(
+                        'key' => 'field_image',
+                        'label' => 'Immagine',
+                        'name' => 'img',
+                        'type' => 'image',
+                        'return_format' => 'url',
                     ),
                 ),
-            ),
-        ));
-    endif;
+                'location' => array(
+                    array(
+                        array(
+                            'param' => 'options_page',
+                            'operator' => '==',
+                            'value' => 'woocommerce-elements-config',
+                        ),
+                    ),
+                ),
+            ));
+        endif;
+    }
 }
+
+AddWhatsappButton::init();
