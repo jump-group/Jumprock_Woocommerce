@@ -15,17 +15,19 @@ class AddWhatsappButton
     public static function whatsapp_button_shortcode()
     {
         global $post;
-        $btn_whatsapp = get_field('whatsapp_button', 'options');
+        $wts_phone = get_field('wts_phone', 'option');
+        $wts_link_text = get_field('wts_link_text', 'option');
+        $wts_btn_text = get_field('wts_btn_text', 'option');
+        $wts_image = get_field('wts_image', 'option');
 
         // Build the WhatsApp button HTML code
         $whatsapp_button = '';
-        if ($btn_whatsapp['phone'] && $btn_whatsapp['img']) {
+        if ($wts_phone && $wts_image) {
             $whatsapp_button .= '<div class="Whatsapp">';
-            $whatsapp_button .= '<div class="Whatsapp__Avatar"><img src="' . $btn_whatsapp['img'] . '"></div>';
-            $whatsapp_button .= '<a target="_blank" href="https://api.whatsapp.com/send?phone=' . $btn_whatsapp['phone'] . '&text=' . $btn_whatsapp['link_text'] . ' ' . $post->post_title . '" id="whatsapp_button" class="Whatsapp__Btn">' . $btn_whatsapp['btn_text'] . '</a>';
+            $whatsapp_button .= '<div class="Whatsapp__Avatar"><img src="' . $wts_image . '"></div>';
+            $whatsapp_button .= '<a target="_blank" href="https://api.whatsapp.com/send?phone=' . $wts_phone . '&text=' . $wts_link_text . ' ' . $post->post_title . '" id="whatsapp_button" class="Whatsapp__Btn">' . $wts_btn_text . '</a>';
             $whatsapp_button .= '</div>';
         }
-
         return $whatsapp_button;
     }
 
@@ -37,25 +39,26 @@ class AddWhatsappButton
                 'title' => 'Pulsante Whatsapp',
                 'fields' => array(
                     array(
-                        'key' => 'field_phone',
+                        'key' => 'wts_phone',
                         'label' => 'Numero di telefono',
                         'name' => 'phone',
                         'type' => 'number',
+                        'parent' => 'whatsapp_button'
                     ),
                     array(
-                        'key' => 'field_link_text',
+                        'key' => 'wts_link_text',
                         'label' => 'Testo link',
                         'name' => 'link_text',
                         'type' => 'text',
                     ),
                     array(
-                        'key' => 'field_btn_text',
+                        'key' => 'wts_btn_text',
                         'label' => 'Testo bottone',
                         'name' => 'btn_text',
                         'type' => 'text',
                     ),
                     array(
-                        'key' => 'field_image',
+                        'key' => 'wts_image',
                         'label' => 'Immagine',
                         'name' => 'img',
                         'type' => 'image',
