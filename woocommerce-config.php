@@ -9,33 +9,38 @@ License:      MIT License
 */
 
 namespace JumpGroup\Woocommerce;
-use function Env\env;
+
 use JumpGroup\Woocommerce\AddOptionPage;
-use JumpGroup\Woocommerce\AddProductAvailability;
 use JumpGroup\Woocommerce\AddWhatsappButton;
+use JumpGroup\Woocommerce\AddProductAvailability;
+use JumpGroup\Woocommerce\AddProductTags;
 use JumpGroup\Woocommerce\InvertCheckoutBilling;
 
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if (!defined('WPINC')) {
+  die;
 }
 
-class Init{
+class Init
+{
 
   protected static $instance;
 
-    public static function get_instance(){
-      if( null == self::$instance ){
-        self::$instance = new self();
-      }
-      return self::$instance;
+  public static function get_instance()
+  {
+    if (null == self::$instance) {
+      self::$instance = new self();
     }
+    return self::$instance;
+  }
 
-    protected function __construct(){
-      AddOptionPage::init();
-      AddWhatsappButton::init();
-      AddProductAvailability::init();
-      InvertCheckoutBilling::init();
-    }
+  protected function __construct()
+  {
+    AddOptionPage::init();
+    AddWhatsappButton::init();
+    AddProductAvailability::init();
+    AddProductTags::init();
+    InvertCheckoutBilling::init();
+  }
 }
 
 $instance = Init::get_instance();
