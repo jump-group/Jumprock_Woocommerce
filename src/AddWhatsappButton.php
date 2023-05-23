@@ -2,8 +2,6 @@
 
 namespace JumpGroup\Woocommerce;
 
-use function Env\env;
-
 class AddWhatsappButton
 {
     public static function init()
@@ -22,7 +20,7 @@ class AddWhatsappButton
 
         // Build the WhatsApp button HTML code
         $whatsapp_button = '';
-        if ($wts_phone && $wts_image) {
+        if ($wts_phone && $wts_image && $post->post_title) {
             $whatsapp_button .= '<div class="Whatsapp">';
             $whatsapp_button .= '<div class="Whatsapp__Avatar"><img src="' . $wts_image . '"></div>';
             $whatsapp_button .= '<a class="Whatsapp__Btn" target="_blank" href="https://api.whatsapp.com/send?phone=' . $wts_phone . '&text=' . $wts_link_text . ' ' . $post->post_title . '" id="whatsapp_button">' . $wts_btn_text . '</a>';
