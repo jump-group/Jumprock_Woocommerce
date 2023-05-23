@@ -11,6 +11,7 @@ License:      MIT License
 namespace JumpGroup\Woocommerce;
 use function Env\env;
 use JumpGroup\Woocommerce\AddOptionPage;
+use JumpGroup\Woocommerce\AddProductAvailability;
 use JumpGroup\Woocommerce\AddWhatsappButton;
 use JumpGroup\Woocommerce\InvertCheckoutBilling;
 
@@ -32,6 +33,7 @@ class Init{
     protected function __construct(){
       AddOptionPage::init();
       AddWhatsappButton::init();
+      AddProductAvailability::init();
       InvertCheckoutBilling::init();
     }
 }
