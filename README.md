@@ -65,20 +65,26 @@ Di seguito uno stile css di default applicabile al pulsante
 ```
 
 ### **AddProductAvailability**
-La classe AddProductAvailability definisce un metodo statico "init" che inizializza la gestione della disponibilità del prodotto.
-Il metodo init registra due hook di azione: "acf/init" e "add_shortcode".
-Il primo hook collega il metodo "createAcf" alla creazione dei campi personalizzati di Advanced Custom Fields (ACF).
-Il secondo hook collega il metodo `product_availability_box_shortcode` alla creazione di uno shortcode personalizzato chiamato `jump_product_availability_box`.
 
-Il metodo `product_availability_box_shortcode` viene richiamato quando viene utilizzato lo shortcode `jump_product_availability_box`.
-Recupera il testo del box di disponibilità da ACF, posizionato nella pagina opzioni **Configurazioni elementi Woocommerce** creata dal file `AddOptionPage.php`.
-Il codice HTML del box di disponibilità viene restituito come risultato del metodo.
+La classe `AddProductAvailability` è responsabile per l'aggiunta di un shortcode e l'integrazione di Advanced Custom Fields (ACF) per visualizzare la disponibilità dei prodotti su un sito WooCommerce.
 
-Il metodo createAcf viene richiamato durante l'inizializzazione di ACF.
-Utilizzando la funzione `acf_add_local_field_group`, viene creato un gruppo di campi per il box di disponibilità del prodotto, che comprende il testo da mostrare.
+#### Utilizzo
+1. Includi il file della classe `AddProductAvailability` nel tuo progetto.
+2. Inizializza la funzionalità chiamando il metodo `init()` della classe `AddProductAvailability`.
 
+#### Shortcode
+La classe fornisce uno shortcode `jump_product_availability_box` che può essere utilizzato per visualizzare la disponibilità dei prodotti su un elemento Box.
+
+#### Metodi
+**init()** Questo metodo inizializza la funzionalità agganciandosi alle azioni necessarie di WordPress.
+
+**product_availability_box_shortcode()** Questo metodo genera l'output HTML per visualizzare il box di disponibilità del prodotto. Recupera il testo del box di disponibilità dalla pagina delle opzioni di ACF. Se il testo è presente, genera l'HTML del box di disponibilità.
+
+**createAcf()** Questo metodo crea il gruppo di campi ACF necessario. Registra il campo "text" come campo di testo. I parametri vengono configurati nella pagina delle opzioni `woocommerce-elements-config`.
+
+#### Stile
 Lo stile del box deve essere inserito all'interno del foglio di stile del tema child del sito dove si utilizza il mu-plugin.
-Di seguito uno stile css di default applicabile al pulsante
+Di seguito uno stile css di default applicabile al pulsante.
 
 ```
 .BoxProductAvailability {
@@ -91,3 +97,79 @@ Di seguito uno stile css di default applicabile al pulsante
 ```
 
 ---------------
+
+### **AddProductTags**
+La classe `AddProductTags` si occupa di aggiungere uno shortcode e integrare Advanced Custom Fields (ACF) per visualizzare i tag dei prodotti su un sito WooCommerce.
+
+#### Utilizzo
+1. Includere il file della classe `AddProductTags` nel progetto.
+2. Inizializzare la funzionalità chiamando il metodo `init()` della classe `AddProductTags`.
+
+#### Shortcode
+La classe fornisce uno shortcode `[jump_product_tags]` che può essere utilizzato per visualizzare i tag dei prodotti sul front-end.
+
+#### Metodi
+**init()** Questo metodo inizializza la funzionalità agganciandosi alle azioni necessarie di WordPress.
+
+**product_tags_shortcode()** Questo metodo genera l'output HTML per visualizzare i tag dei prodotti. Recupera i tag dei prodotti associati al post corrente e verifica il valore del campo `tag_has_link` dalla pagina delle opzioni di ACF. In base al valore, genera l'HTML appropriato per ciascun tag. 
+Se il valore di `tag_has_link` è `yes` allora i tag nella scheda prodotto saranno cliccabili e riporteranno alla pagina di archivio dei tag.
+
+**createAcfOptionPage()** Questo metodo crea il gruppo di campi ACF necessario. Registra il campo `tag_has_link` come un pulsante radio con le opzioni `Yes` e `No`. Il valore predefinito è impostato su `Yes`. Il gruppo di campi è configurabile alla pagina delle opzioni `woocommerce-elements-config`.
+
+**createAcfProductTagPage()** Questo metodo aggiunge un ACF di tipo immagine in ogni tag di prodotto. Registra il campo `tag_image`. In base al valore, nell'HTML del tag si vedrà o meno l'immagine.
+E' necessario caricare un file svg di 23x23px
+
+#### Stile
+Lo stile dei tag deve essere inserito all'interno del foglio di stile del tema child del sito dove si utilizza il mu-plugin.
+Di seguito uno stile css di default applicabile.
+
+```
+.TagWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.TagWrapper__Image {
+    font-family: "Acre", Sans-serif;
+    display: inline-block;
+    margin-bottom: -0.5rem;
+    margin-right: 0.3rem;
+    height: 42px;
+    /* position: relative;
+    flex: 0 0 13rem; */
+    padding-right: 0rem;
+    font-weight: 600;
+}
+
+.TagWrapper__Image img {
+    display: inline-block;
+    width: 40px;
+    height: auto;
+    object-fit: cover;
+    padding: 4px 4px 4px 0px;
+    border-radius: 50%;
+}
+
+.TagWrapper__Image::after {
+    content: attr(data-title);
+    font-size: 0.8em;
+    padding: 2.5px 10px;
+    background: #FFEEE4;
+    color: #EC7556;
+    border: 1px solid #FFEEE4;
+    border-radius: 32px;
+    text-align: left;
+    /* position: absolute;
+    top: 9px;
+    left: 25px;
+    z-index: -1; */
+    padding: 8px 24px;
+}
+```
+
+#### Future migliorie
+- Possibilità di inserire un immagine esplicativa del tag
