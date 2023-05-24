@@ -2,8 +2,8 @@
 
 La repository comprende:
 - tutti i plugin fondamentali per il funzionamento di Woocommerce sulla stack di sviluppo;
-- plugin aggiuntivi per estendere le funzionalità;
-- funzionalità di marketing aggiuntive che coinvolgono il flusso di acquisto;
+- plugin aggiuntivi per estendere le funzionalità di woocommerce;
+- funzionalità di marketing aggiuntive che coinvolgono il flusso di acquisto e la scheda prodotto;
 
 ---------------
 ## Cartella SRC [WIP]
@@ -16,18 +16,25 @@ Durante l'inizializzazione di WordPress, la funzione anonima viene eseguita. Con
 La pagina di opzioni viene chiamata `"Configurazioni elementi Woocommerce"` avente come slug `woocommerce-elements-config`. 
 
 ### **AddWhatsappButton.php** 
-Questo codice PHP definisce una classe chiamata `AddWhatsappButton` nel namespace "JumpGroup\Woocommerce". La classe contiene due metodi statici: "init" e "whatsapp_button_shortcode".
+La classe `AddWhatsappButton` fornisce un metodo per aggiungere un pulsante WhatsApp personalizzato nella scheda di un prodotto Woocommerce.
 
-Il metodo "init" viene chiamato all'avvio del plugin e registra due hook di azione. 
+#### Utilizzo
+1. Assicurarsi che il plugin Advanced Custom Fields (ACF) sia installato e attivato.
+2. Inizializza la funzionalità chiamando il metodo `init()` della classe `AddWhatsappButton`
 
-Il primo hook, `acf/init`, collega il metodo "createAcf" alla creazione dei campi personalizzati di ACF. Il secondo hook, `add_shortcode`, collega il metodo `whatsapp_button_shortcode` alla creazione di uno shortcode personalizzato chiamato `jump_whatsapp_button`.
+#### Shortcode
+La classe fornisce uno shortcode `jump_whatsapp_button` che può essere utilizzato per visualizzare il pulsant di whatsapp nella scheda prodotto.
 
-Il metodo `whatsapp_button_shortcode` viene richiamato quando viene utilizzato lo shortcode `jump_whatsapp_button` all'interno del contenuto di un prodotto. Questo metodo recupera alcuni valori dai campi personalizzati di ACF (`wts_phone`, `wts_link_text`, `wts_btn_text`, `wts_image`) e li utilizza per costruire il codice del pulsante.
+#### Metodi
+**init()** Il metodo init() viene chiamato all'avvio del plugin e registra l'azione acf/init e lo shortcode `[jump_whatsapp_button]` per gestire il pulsante WhatsApp.
+
+**whatsapp_button_shortcode()** Il metodo `whatsapp_button_shortcode` viene richiamato quando  viene utilizzato lo shortcode `jump_whatsapp_button` all'interno del contenuto di un prodotto. Questo metodo recupera alcuni valori dai campi personalizzati di ACF (`wts_phone`, `wts_link_text`, `wts_btn_text`, `wts_image`) e li utilizza per costruire il codice del pulsante.
 
 Il pulsante di WhatsApp viene costruito solo se il numero di telefono,l'immagine e il nome del prodotto sono disponibili. Il codice HTML del pulsante viene restituito come risultato del metodo.
 
-Il metodo "createAcf" definisce un gruppo di campi personalizzati utilizzando la libreria ACF. Il gruppo di campi viene aggiunto solo se la funzione "acf_add_local_field_group" è disponibile. I campi personalizzati definiti includono il numero di telefono, il testo del link, il testo del pulsante e l'immagine. Questi campi sono configurabili nella pagina opzioni **Configurazioni elementi Woocommerce** creata dal file `AddOptionPage.php`
+**createAcf()** Il metodo `createAcf` definisce un gruppo di campi personalizzati utilizzando la libreria ACF. Il gruppo di campi viene aggiunto solo se la funzione `acf_add_local_field_group` è disponibile. I campi personalizzati definiti includono il numero di telefono, il testo del link, il testo del pulsante e l'immagine. Questi campi sono configurabili nella pagina opzioni **Configurazioni elementi Woocommerce** creata dal file `AddOptionPage.php`
 
+#### Stile
 Lo stile del pulsante deve essere inserito all'interno del foglio di stile del tema child del sito dove si utilizza il mu-plugin.
 Di seguito uno stile css di default applicabile al pulsante
 ```
