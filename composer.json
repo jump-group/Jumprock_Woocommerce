@@ -2,7 +2,9 @@
   "name": "jumprock_packages/woocommerce",
   "type": "wordpress-muplugin",
   "description": "Bundle of Woocommerce Depencies for every WP project",
+  "keywords": ["wordpress", "plugin", "woocommerce"],
   "homepage": "http://jumpgroup.it",
+  "license": "MIT",
   "repositories": [
     {
       "type": "composer",
