@@ -3,7 +3,7 @@
 Plugin Name:  Woocommerce plugins
 Plugin URI:   https://jumpgroup.it/
 Description:  Adds Woocommerce plugins and improvements
-Version:      2.0.0
+Version:      3.0.0
 Author:       Jump Group
 License:      MIT License
 */
