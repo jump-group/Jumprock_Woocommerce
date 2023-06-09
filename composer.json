@@ -26,6 +26,6 @@
     "psr-4": {
         "JumpGroup\\Woocommerce\\": "src/"
     },
-    "exclude-from-classmap": ["test/**"]
+    "exclude-from-classmap": ["test/*"]
   }
 }
