@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "jumprock_elementor_hello",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "18"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@jumpgroup/trellis-tools": "^1.5.2"
+  },
+  "scripts": {
+    "env-install": "cat .env.example > .env",
+    "nv": "echo $npm_package_engines_node",
+    "postinstall": "yarn -s nv > .nvmrc",
+    "kill-all-docker": "[[ ! -z $(docker ps -q) ]] && docker kill $(docker ps -q) || echo ok",
+    "start": "yarn kill-all-docker && docker-compose up",
+    "recreate": "cat .env.example > .env && docker-compose up --force-recreate --build",
+    "repo-setup": "trellis-tools setup-local && composer install",
+    "wordpress-setup": "trellis-tools setup-wordpress",
+    "deploy-staging": "trellis-tools deploy -e staging",
+    "deploy-production": "trellis-tools deploy -e production",
+    "provision-staging": "trellis-tools provision -e staging",
+    "provision-production": "trellis-tools provision -e production",
+    "wp": "docker exec -it jumprock_elementor_hello-wordpress wp --allow-root "
+  },
+  "author": "",
+  "license": "ISC"
+}

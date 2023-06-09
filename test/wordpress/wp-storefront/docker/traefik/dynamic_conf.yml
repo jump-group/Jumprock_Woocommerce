@@ -1,0 +1,6 @@
+tls:
+  certificates:
+    - certFile: "etc/traefik/certs/site.test.pem"
+      keyFile: "etc/traefik/certs/site.test-key.pem"
+    - certFile: "etc/traefik/certs/mailhog.site.test.pem"
+      keyFile: "etc/traefik/certs/mailhog.site.test-key.pem"

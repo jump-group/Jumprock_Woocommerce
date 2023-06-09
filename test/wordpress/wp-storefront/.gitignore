@@ -1,0 +1,51 @@
+# Docker
+docker/db/
+docker/certs/
+docker/nginx/
+docker-compose.yml
+.nvmrc
+node_modules
+
+# Trellis
+.secret-fetcher
+.trellis/
+
+# Dropins
+web/app/object-cache.php
+
+# Application
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+!web/app/plugins/LayerSlider
+!web/app/plugins/revslider
+!web/app/plugins/elementor-pro
+!web/app/themes/.gitkeep
+web/app/mu-plugins/*/
+!web/app/mu-plugins/jmp-*.php
+!web/app/mu-plugins/jmp-*/*
+web/app/upgrade
+web/app/uploads/*
+!web/app/uploads/.gitkeep
+
+# WordPress
+web/wp
+web/.htaccess
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Composer
+vendor/*
+!vendor/.gitkeep
+
+web/app/ewww/
+
+yarn-error\.log
+
+web/app/languages/
+
+.DS_Store
+
+*.lock
