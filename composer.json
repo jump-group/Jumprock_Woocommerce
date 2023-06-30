@@ -26,10 +26,5 @@
     "psr-4": {
         "JumpGroup\\Woocommerce\\": "src/"
     }
-  },
-  "scripts": {
-    "post-require-cmd": [
-      "rm -rf test"
-    ]
   }
 }
