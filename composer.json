@@ -25,7 +25,11 @@
   "autoload": {
     "psr-4": {
         "JumpGroup\\Woocommerce\\": "src/"
-    },
-    "exclude-from-classmap": ["/test/"]
+    }
+  },
+  "scripts": {
+    "post-require-cmd": [
+      "rm -rf test"
+    ]
   }
 }
