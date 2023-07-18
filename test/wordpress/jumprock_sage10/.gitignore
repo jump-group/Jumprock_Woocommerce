@@ -1,0 +1,39 @@
+# Docker
+docker/db/
+docker/certs/
+
+# Application
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+web/app/mu-plugins/*/
+!web/app/mu-plugins/jmp-*.php
+!web/app/mu-plugins/jmp-*/*
+web/app/upgrade
+web/app/cache/
+web/app/uploads/*
+!web/app/uploads/.gitkeep
+
+# WordPress
+web/wp
+web/.htaccess
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Composer
+vendor/*
+!vendor/.gitkeep
+
+web/app/ewww/
+
+yarn-error\.log
+
+web/app/languages/
+
+.DS_Store
+
+node_modules/
+
+.nvmrc

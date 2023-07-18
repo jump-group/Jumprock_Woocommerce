@@ -1,0 +1,245 @@
+/* MEDIA QUERIES */
+@mixin media-from($from) {
+  @media (min-width: $from) {
+    @content;
+  }
+}
+
+@mixin media-between($from, $to) {
+  @media (min-width: $from) and (max-width: $to) {
+    @content;
+  }
+}
+
+@mixin media-mobile($to) {
+  @include media-between(0, $to) {
+    @content;
+  }
+}
+
+@mixin svg-as-bg($url, $color, $width: 50px, $height: $width) {
+  content: '';
+  background-image: unquote('url("' + $url + '?fill=' + $color + '")');
+  width: $width;
+  height: $height;
+  background-size: $width $height;
+  display: block;
+  background-repeat: no-repeat;
+}
+
+/* RESPONSIVE FONT SIZE */
+
+@mixin fluid-type($mob-font-size, $uw-font-size, $min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1==$u2 and $u1==$u3 and $u1==$u4 {
+    & {
+      font-size: $mob-font-size;
+
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+
+      @media screen and (min-width: $max-vw) {
+        font-size: $uw-font-size;
+      }
+    }
+  }
+}
+
+/* COLOR MAPS */
+@function check-color-map-presence() {
+  @if (global-variable-exists('color-map')==false) {
+    @error " $color-map is not defined";
+  }
+
+  @if (type-of($color-map) !='map') {
+    @error " $color-map is not a map";
+  }
+
+  @return '';
+}
+
+@function get-color($key, $group: $use-block-color) {
+  $check: check-color-map-presence();
+  $color-group: map-get($color-map, $group);
+  $color: map-get($color-group, $key);
+
+  @return $color;
+}
+
+@function modifier-color($key) {
+  $check: check-color-map-presence();
+
+  $color: map-get($block-color, $key);
+
+  @return $color;
+}
+
+/* stylelint-disable */
+@mixin add-color-modifiers($default-group: false) {
+  $check: check-color-map-presence();
+
+  @if ($default-group !='false') {
+    $use-block-color: $default-group !global;
+
+    @content;
+  }
+
+  @each $group in $color-map {
+    $use-block-color: '' !global;
+
+    // taking only the key of the group
+    @each $key in $group {
+      @if (type-of($key) !='map') {
+        // needed because sass varible typing sucks dicks
+        $use-block-color: $key !global;
+      }
+    }
+
+    $capitalized-group: camelize($use-block-color);
+
+    &--#{$capitalized-group} {
+      @content;
+    }
+  }
+
+  $use-block-color: '' !global;
+}
+/* stylelint-enable */
+
+/* Z-INDEX */
+@function get-z($value) {
+  $starting-value: 900;
+  $number-of-z: length($z-index);
+  $steps: calc($starting-value / $number-of-z);
+  $value-index: index($z-index, $value);
+  // revert the index number, so first index stays on top
+  $reverted-index: calc($number-of-z - $value-index + 1);
+
+  @return decimal-ceil($steps * $reverted-index);
+}
+
+/* BEM WRAPPER */
+
+// Prefix all block names with this
+$blockPrefix: '';
+
+// BEM mixins
+// See https://css-tricks.com/snippets/sass/bem-mixins/
+
+// Generates a block class selector
+// e.g. “.prefix-name”
+/* stylelint-disable */
+@mixin block($name) {
+  $this: '.'+#{$blockPrefix}#{$name} !global;
+  $this-class: #{$blockPrefix}#{$name} !global;
+
+  .#{$blockPrefix}#{$name} {
+    @content;
+  }
+}
+/* stylelint-enable */
+
+// Inside a block, generates an modifier class selector
+// e.g. “.prefix-name--modifier”
+@mixin block-modifier($name) {
+  &--#{$name} {
+    @content;
+  }
+}
+
+// AT ROOT
+
+@mixin at-root($class, $context: false) {
+  $selector: '.'+$class;
+
+  @if ($context) {
+    $selector: #{$context + $selector};
+  }
+
+  @if ($this-class and $this-class !='') {
+
+    // we're inside a block
+    @at-root {
+      #{ $selector } {
+        .#{ $this-class } {
+          @content;
+        }
+      }
+    }
+  }
+
+  @else {
+    @at-root {
+      #{$selector} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin status($class, $context: false) {
+  @include at-root($class, $context) {
+    @content;
+  }
+}
+
+@mixin template($class, $context: false) {
+  @include at-root($class, $context) {
+    @content;
+  }
+}
+
+/* VENDOR PREFIXES */
+
+@mixin prefix($property, $value) {
+  @each $prefix in ('webkit', 'moz', 'ms', 'o') {
+    -#{$prefix}-#{$property}: $value;
+  }
+
+  #{$property}: $value;
+}
+
+/* BUTTONS */
+
+@mixin button-style {
+  @extend %reset-button;
+
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  font-size: var(--fs-400);
+  line-height: var(--lh-300);
+  border-radius: 5px;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculate_rem($size);
+}
+
+@mixin aspect-ratio($numerator, $denominator) {
+  @supports (aspect-ratio: calc($numerator / $denominator)) {
+    aspect-ratio: calc($numerator / $denominator);
+  }
+
+  @supports not (aspect-ratio: calc($numerator / $denominator)) {
+    &::before {
+      float: left;
+      padding-top: calc((#{$numerator} / #{$denominator}) * 100 * 1%);
+      content: '';
+    }
+
+    &::after {
+      display: block;
+      content: '';
+      clear: both;
+    }
+  }
+}

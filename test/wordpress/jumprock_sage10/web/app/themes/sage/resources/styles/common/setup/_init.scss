@@ -1,0 +1,16 @@
+html {
+  min-height: -webkit-fill-available;
+  scroll-behavior: smooth;
+  font-family: var(--ff-primary);
+  font-weight: var(--fw-regular);
+}
+
+main#main {
+  // min-height: calc((var(--vh, 1vh) * 100) - var(--header-height));
+  overflow-x: hidden;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

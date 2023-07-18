@@ -1,0 +1,60 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import "common/core/functions";
+@import "common/core/variables";
+
+/**
+ * Import npm dependencies
+ *
+ * Prefix your imports with `~` to grab from node_modules/
+ * @see https://github.com/webpack-contrib/sass-loader#imports
+ */
+
+/* FONTS - Scommentare le Versioni che servono */
+// @import "~fapro-free/scss/fontawesome.scss";
+// @import "~fapro-free/scss/brands.scss";
+// @import "~fapro-free/scss/regular.scss";
+// @import "~fapro-free/scss/solid.scss";
+// @import "~fapro-free/scss/light.scss";
+
+/* LIBRARIES */
+// @import "~reseter.css/src/scss/reseter.scss";
+// @import "~swiper/css/bundle";
+// @import "~hamburgers/_sass/hamburgers/hamburgers";
+
+/** Import theme common */
+@import "common/core/helpers";
+@import "common/core/mixins";
+@import "common/core/placeholders";
+@import "common/setup/init";
+@import "common/styleguides/fonts";
+@import "common/styleguides/typography";
+@import "common/core/animations";
+
+/* Import Atoms */
+
+/* Import Blocks */
+
+/* Import Molecules */
+@import "elements/molecules/navigation";
+
+/* Import Components */
+
+/* Import Compositions */
+
+/* Import Sections */
+@import "elements/sections/header";
+@import "elements/sections/footer";
+@import "elements/sections/archive";
+@import "elements/sections/single";
+@import "elements/sections/page-404";
+
+.transition-fade {
+  transition: 0.4s;
+  opacity: 1;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0;
+}

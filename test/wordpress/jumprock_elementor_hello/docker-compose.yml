@@ -1,0 +1,112 @@
+version: "3.6"
+services:
+  traefik:
+    image: "traefik:v2.4.7"
+    container_name: ${APP_NAME}-traefik
+    networks:
+      - web-network
+    volumes: 
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - ./docker/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./docker/traefik/dynamic_conf.yml:/etc/traefik/dynamic_conf.yml
+      - ./docker/certs:/etc/traefik/certs # SSL Development certificates
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8081:8080"     
+      
+  # ecommerce
+  nginx:
+    image: nginx:latest
+    container_name: ${APP_NAME}-nginx
+    volumes:
+      - ./docker/nginx/multisite-${WP_ALLOW_MULTISITE:-false}/:/etc/nginx/templates/
+      - ./:/var/www/html:rw,cached
+      - ./docker/certs:/etc/nginx/certs
+    environment:
+      - "NGINX_ENVSUBST_TEMPLATE_SUFFIX=.conf"
+    depends_on:
+      - wordpress
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wordpress.entrypoints=http, https"
+      - "traefik.http.routers.wordpress.rule=Host(`jumprock_elementor_hello.test`)"
+      - "traefik.http.routers.wordpress.tls=true"
+    networks:
+      - web-network
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: ${APP_NAME}-wordpress
+    networks:
+      - web-network
+    volumes:
+      - ./:/var/www/html:rw,cached
+      - ./docker/config/php.ini:/usr/local/etc/php/conf.d/php.ini
+    labels:
+      - traefik.docker.network=web-network
+    restart: unless-stopped
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mariadb
+    container_name: ${APP_NAME}-mysql
+    command: --lower_case_table_names=2
+    volumes:
+      - "./docker/db:/var/lib/mysql:delegated"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+    restart: unless-stopped
+    networks:
+      - web-network
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ${APP_NAME}-phpmyadmin
+    volumes:
+      - ./docker/config/phpmyadmin.ini:/usr/local/etc/php/conf.d/phpmyadmin.ini
+    environment:
+      PMA_HOST: "${DB_HOST}"
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+    networks:
+      - web-network
+    ports:
+      - "8082:80"
+    links:
+      - mysql:mysql
+    restart: unless-stopped
+
+  mailhog:
+    container_name: ${APP_NAME}-mailhog
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.mailhog.entrypoints: https
+      traefik.http.routers.mailhog.rule: "Host(`mailhog.jumprock_elementor_hello.test`)"
+      traefik.http.routers.mailhog.tls: true
+      traefik.http.services.mailhog.loadbalancer.server.port: 8025
+    restart: unless-stopped
+    networks:
+      - web-network
+
+#Docker Networks
+networks:
+  web-network:
+    driver: bridge
+#Volumes
+volumes:
+  lbdata:
+    driver: local

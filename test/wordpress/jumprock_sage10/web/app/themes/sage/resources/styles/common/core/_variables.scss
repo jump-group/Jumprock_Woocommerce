@@ -1,0 +1,172 @@
+//Animations
+$transition_time: 300ms;
+$fa-font-path: "../fonts";
+
+//Default Colors
+$black: hsl(0 0% 0% / 100%);
+$white: hsl(0 0% 100% / 100%);
+$grey: hsl(0 0% 50% / 100%);
+
+//Transparent Colors
+$full-trans: hsl(0 0% 0% / 0%);
+$white-trans-100: hsl(0 0% 100% / 1%);
+$white-trans-300: hsl(0 0% 100% / 3%);
+$white-trans-400: hsl(0 0% 100% / 5%);
+$grey-trans: hsl(0 0% 50% / 5%);
+$blue-trans: hsl(223 73% 10% / 95%);
+$black-trans: hsl(0 0% 0% / 5%);
+
+//Notifications Colors
+$success: hsl(120 100% 33% / 100%);
+$warning: hsl(29 100% 50% / 100%);
+$error: hsl(0 100% 50% / 100%);
+
+// Custom Colors
+$orange: hsl(37 100% 48% / 100%);
+$light-blue: hsl(223 62% 13% / 100%); // per card, quotes
+$blue: hsl(223 73% 10% / 100%);
+$violet: hsl(274 89% 57% / 100%);
+$anthracite: hsl(0 0% 13% / 100%); // footer
+
+//CSS4 Variable
+:root {
+  // colori principali
+  --clr-primary-400: #{$white};
+  --clr-secondary-400: #{$blue};
+
+  // colori accento
+  --clr-orange-400: #{$orange};
+  --clr-violet-400: #{$violet};
+
+  // Notifications Colors
+  --clr-notification-success: #{$success};
+  --clr-notification-warning: #{$warning};
+  --clr-notification-error: #{$error};
+
+  // Background
+  --bg-primary-300: #{$light-blue};
+  --bg-primary-400: #{$blue};
+  --bg-secondary-400: #{$anthracite};
+  --bg-tertiary-400: var(--grd-primary-400);
+
+  // Gradients
+  // Gradient Generator https://cssgradient.io/
+  // Creare una helperclass che polyfilla per il crossbrowser
+  --grd-primary-400: linear-gradient(270deg, var(--clr-orange-400) 1.73%, var(--clr-violet-400) 96.01%);
+  --grd-primary-900: linear-gradient(0deg, rgba(0 0 0 / 80%), rgba(0 0 0 / 80%));
+
+  // Variazioni di grigio
+  --clr-neutral-100: #{$white};
+  --clr-neutral-500: #{$grey};
+  --clr-neutral-800: #{$anthracite}; //#202020
+  --clr-neutral-900: #{$black};
+
+  // Variazioni di grigio Trasparenti
+  --clr-full-transparent: #{$full-trans};
+  --clr-neutral-trans-100: #{$white-trans-100};
+  --clr-neutral-trans-300: #{$white-trans-300};
+  --clr-neutral-trans-400: #{$white-trans-400};
+  --clr-neutral-trans-500: #{$grey-trans};
+  --clr-neutral-trans-900: #{$black-trans};
+  --bg-primary-trans-400: #{$blue-trans};
+
+  // Font Familis
+  --ff-primary: 'Proxima Nova', sans-serif;
+  --ff-body: var(--ff-primary);
+  --ff-heading: var(--ff-primary);
+
+  // Font Weight
+  --fw-thin: 100;
+  --fw-medium: 300;
+  --fw-regular: 400;
+  --fw-semi-bold: 500;
+  --fw-bold: 700;
+  --fw-extra-bold: 800;
+  --fw-black: 900;
+
+  // Font Sizes
+  // PX to REM Calculator https://nekocalc.com/px-to-rem-converter
+  // Se si volesse usare clamp() vedi https://modern-fluid-typography.vercel.app/ per refernce
+  // Diversamente usare le mediaQuery per variare il fontsize in maniera netta.
+  --fs-100: 0.5rem; // 8px
+  --fs-200: 0.75rem; // 12px
+  --fs-300: 0.875rem; // 14px
+  --fs-400: 1rem; // 16px
+  --fs-450: 1.125rem; // 18px
+  --fs-500: 1.25rem; // 20px
+  --fs-550: 1.5rem; // 24px
+  --fs-600: 1.875rem; // 30px
+  --fs-700: 2.5rem; // 40px
+  --fs-800: 3.125rem; // 50px
+  --fs-900: 4.375rem; // 70px
+
+  // Line height
+  --lh-300: 1;
+  --lh-400: 1.2;
+  --lh-500: 1.4;
+  --lh-600: 1.5;
+
+  // Explicit FontSizes
+  --fs-nav-panel-item-text: var(--fs-300);
+  --fs-body: var(--fs-450);
+  --fs-main-nav: var(--fs-400);
+  --fs-nav-panel-item-title: var(--fs-500);
+  --fs-nav-panel-col-title: var(--fs-600);
+  --fs-nav-panel-title: var(--fs-800);
+  --fs-footer-text: var(--fs-300);
+  --fs-social-list: var(--fs-600);
+
+  // Sizes
+  --header-height: 6.125rem;
+  --bredcrumbs-height: 3.125rem;
+  --side-wrapper-padding: 1vw; //da valutarne l'utilizzo in base al design/necessità
+  // --side-wrapper-padding: clamp(1rem, 4vw, 7vw); //da valutarne l'utilizzo in base al design/necessità
+  --input-field-height: 2.6rem;
+
+  // Dullness
+  --dull-border-radius-100: 3px;
+  --dull-border-radius-300: 0.5rem;
+  --dull-border-radius-400: 0.875rem;
+  --dull-border-radius-500: 1rem;
+  --dull-border-radius-900: 3rem;
+  --global-content-edge-padding: calc(var(--side-wrapper-padding) + 1rem);
+}
+
+@screen sm {
+  :root {
+    --side-wrapper-padding: 2vw;
+  }
+}
+
+@screen md {
+  :root {
+    --side-wrapper-padding: 3vw;
+  }
+}
+
+@screen lg {
+  :root {
+    --header-height: 12rem;
+    --side-wrapper-padding: 5vw;
+  }
+}
+
+@screen xl {
+  :root {
+    --header-height: 6.125rem;
+    --side-wrapper-padding: 7vw;
+  }
+}
+
+/** Z-INDEX */
+// first index stays on top
+$z-index: (
+);
+
+$hamburger-padding-x: 0;
+$hamburger-padding-y: 0;
+$hamburger-hover-opacity: 1;
+$hamburger-layer-width: 100%;
+$hamburger-layer-height: 2px;
+$hamburger-layer-spacing: 5px;
+$hamburger-layer-border-radius: 0;

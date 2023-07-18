@@ -1,0 +1,87 @@
+.transform-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+%transform-center {
+  @extend .transform-center;
+}
+
+%reset-button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+%fa {
+  @extend .fa !optional;
+}
+
+.container-wrapper {
+  width: 100%;
+  max-width: calc(100% - (var(--side-wrapper-padding) * 2));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: 0 auto;
+}
+
+%container-wrapper {
+  @extend .container-wrapper;
+}
+
+.block-section-wrapper {
+  width: 100%;
+  padding: 0 calc(var(--side-wrapper-padding) + 1rem);
+}
+
+.block-section-wrapper-narrow {
+  padding: 0 calc(var(--side-wrapper-padding) + 1rem);
+
+  @screen md {
+    padding: 0 calc(var(--side-wrapper-padding) + 6rem);
+  }
+
+  @screen xl {
+    padding: 0 calc(var(--side-wrapper-padding) + 12rem);
+  }
+}
+
+%block-section-wrapper {
+  @extend .block-section-wrapper;
+}
+
+%block-section-wrapper-narrow {
+  @extend .block-section-wrapper-narrow;
+}
+
+.first-and-last-child-no-margin {
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+%first-and-last-child-no-margin {
+  @extend .first-and-last-child-no-margin;
+}

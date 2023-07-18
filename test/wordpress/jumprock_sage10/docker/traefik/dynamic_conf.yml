@@ -1,0 +1,6 @@
+tls:
+    certificates:
+    - certFile: "etc/traefik/certs/sage10.test+4-client.pem"
+      keyFile: "etc/traefik/certs/sage10.test+4-client-key.pem"
+    - certFile: "etc/traefik/certs/mailhog.sage10.test.pem"
+      keyFile: "etc/traefik/certs/mailhog.sage10.test-key.pem"

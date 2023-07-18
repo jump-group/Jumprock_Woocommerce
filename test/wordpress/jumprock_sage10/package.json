@@ -1,0 +1,45 @@
+{
+    "private": true,
+    "name": "sage10",
+    "version": "1.0.0",
+    "description": "",
+    "devDependencies": {
+        "lerna": "^3.22.1"
+    },
+    "engines": {
+        "node": "18"
+    },
+    "dependencies": {
+        "await-exec": "^0.1.2",
+        "caniuse-lite": "^1.0",
+        "dotenv": "^16.0.3",
+        "figlet": "^1.5.2",
+        "hostile": "^1.3.3"
+    },
+    "scripts": {
+        "nv": "echo $npm_package_engines_node",
+        "postinstall": "yarn -s nv > .nvmrc",
+        "insert-host": "sudo hostile set 127.0.0.1 sage10.test && sudo hostile set 127.0.0.1 mailhog.sage10.test",
+        "kill-all-docker": "[[ ! -z $(docker ps -q) ]] && docker kill $(docker ps -q) || echo ok",
+        "start": "yarn kill-all-docker && yarn generate-env && docker-compose up",
+        "recreate": "yarn kill-all-docker && yarn generate-env && docker-compose up --force-recreate --build",
+        "generate-certificate": "cd docker && mkdir -p certs && cd certs && yarn generate-certificate-mailhog && yarn generate-certificate-site",
+        "generate-env": "[ -f .env ] && echo file exits  || cat .env.example > .env",
+        "generate-certificate-mailhog": "cd docker/certs && [ -e mailhog.sage10.test.pem ] && echo mailhog cert exits || mkcert -install mailhog.sage10.test",
+        "generate-certificate-site": "cd docker/certs && [ -e sage10.test+4-client-key.pem ] && echo site cert exits  || mkcert -client sage10.test localhost 127.0.0.1 0.0.0.0 ::1",
+        "install": "bash setenv.sh && yarn repo-setup",
+        "repo-setup": "yarn postinstall && composer install && yarn generate-certificate && yarn sage:install && yarn insert-host",
+        "wp": "docker exec -it sage10-wordpress wp",
+        "sage:install": "yarn install --cwd web/app/themes/sage && yarn --cwd web/app/themes/sage",
+        "sage:start": "yarn --cwd web/app/themes/sage dev",
+        "sage:build": "yarn --cwd web/app/themes/sage build",
+        "sage:test": "yarn --cwd web/app/themes/sage test",
+        "sage:doctor": "yarn --cwd web/app/themes/sage doctor",
+        "sage:translate": "yarn --cwd web/app/themes/sage translate",
+        "sage:translate:compile": "yarn --cwd web/app/themes/sage translate:compile",
+        "first-setup-wordpress": "node first-setup.js",
+        "create-user": "node create-user.js"
+    },
+    "author": "",
+    "license": "UNLICENSED"
+}

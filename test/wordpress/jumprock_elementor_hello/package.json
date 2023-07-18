@@ -1,0 +1,39 @@
+{
+  "private": true,
+  "name": "jumprock_elementor_hello",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "12"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
+  "dependencies": {
+    "await-exec": "^0.1.2",
+    "dotenv": "^16.0.1",
+    "figlet": "^1.5.2",
+    "hostile": "^1.3.3",
+    "yarn": "^1.22.19"
+  },
+  "scripts": {
+    "env-install": "cat .env.example > .env",
+    "nv": "echo $npm_package_engines_node",
+    "insert-host": "sudo hostile set 127.0.0.1 jumprock_elementor_hello.test && sudo hostile set 127.0.0.1 mailhog.jumprock_elementor_hello.test",
+    "postinstall": "yarn -s nv > .nvmrc",
+    "kill-all-docker": "[[ ! -z $(docker ps -q) ]] && docker kill $(docker ps -q) || echo ok",
+    "start": "yarn kill-all-docker && yarn generate-env && docker-compose up",
+    "recreate": "cat .env.example > .env && docker-compose up --force-recreate --build",
+    "generate-certificate": "cd docker && mkdir -p certs && cd certs && yarn generate-certificate-mailhog && yarn generate-certificate-site",
+    "generate-env": "[ -f .env ] && echo file exits  || cat .env.example > .env",
+    "generate-certificate-mailhog": "cd docker/certs && [ -e mailhog.jumprock_elementor_hello.test.pem ] && echo mailhog cert exits || mkcert -install mailhog.jumprock_elementor_hello.test",
+    "generate-certificate-site": "cd docker/certs && [ -e jumprock_elementor_hello.test.pem ] && echo site cert exits  || mkcert -install jumprock_elementor_hello.test",
+    "install": "yarn repo-setup",
+    "repo-setup": "yarn postinstall && composer install && yarn generate-certificate && yarn insert-host",
+    "wp": "docker exec -it jumprock_elementor_hello-wordpress wp --allow-root ",
+    "first-setup-wordpress": "node first-setup.js",
+    "create-user": "node create-user.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

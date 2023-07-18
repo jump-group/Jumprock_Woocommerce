@@ -1,0 +1,29 @@
+{
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features",
+    "editor.formatOnSave": true
+  },
+  "blade.format.enable": true,
+  "bladeFormatter.format.noMultipleEmptyLines": true,
+  "bladeFormatter.format.sortTailwindcssClasses": true,
+  "bladeFormatter.format.indentSize": 1,
+  "[blade]": {
+    "editor.defaultFormatter": "shufo.vscode-blade-formatter",
+    "editor.formatOnSave": true
+
+  },
+  "bladeFormatter.format.useTabs": true,
+  "bladeFormatter.format.wrapLineLength": 9999999999,
+}

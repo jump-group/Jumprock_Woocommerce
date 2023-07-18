@@ -1,0 +1,49 @@
+{
+  "extends": [
+    "@roots/sage/stylelint-config",
+    "@roots/bud-tailwindcss/stylelint-config"
+  ],
+  "plugins": ["stylelint-scss"],
+  "customSyntax": "postcss-scss",
+  "rules": {
+    "indentation": 2,
+    "function-no-unknown": null,
+    "max-line-length": 99999,
+    "block-no-empty": null,
+    "value-no-vendor-prefix": null,
+    "no-missing-end-of-source-newline": null,
+    "property-no-unknown": true,
+    "block-closing-brace-newline-after": [
+      "always",
+      {
+        "ignoreAtRules": [
+          "if",
+          "else"
+        ]
+      }
+    ],
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": [
+          "appearance"
+        ]
+      }
+    ],
+    "rule-empty-line-before": [
+      "always-multi-line",
+      {
+        "except": [
+          "first-nested"
+        ],
+        "ignore": [
+          "after-comment"
+        ]
+      }
+
+    ],
+    "color-function-notation": "modern",
+    "hue-degree-notation": "number",
+    "function-whitespace-after": "always"
+  }
+}

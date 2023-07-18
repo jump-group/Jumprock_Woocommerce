@@ -1,0 +1,9 @@
+@import "scss/_partials/_variables.scss";
+
+/*
+* Codice utilizzato per evitare il problema di Safari su iPhone che va a dare uno stile che gli pare ai numeri di telefono.
+*/
+a[href^=tel] {
+    color: inherit;
+    text-decoration: none;
+}

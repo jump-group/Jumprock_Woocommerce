@@ -1,0 +1,32 @@
+//Color Variables
+// $white: #ffffff;
+// $black: #000;
+// $accent: #B6452A;
+// $dark-grey: #4F4F4F;
+
+// $transparent-dark: rgba(0, 0, 0, 0.3);
+// $transparent-light: #FFFFFF00;
+
+
+:root {
+    // Colors
+    // --primary: #{$accent}; 
+    // --secondary: #{$dark-grey}; 
+    // --white: #{$white}; 
+    // --transparent-dark: #{$transparent-dark};
+    // --transparent-light: #{$transparent-light};
+
+    // //FONTS
+    // --primary-font: 'EB Garamond', serif;
+    // --secondary-font: 'DM Sans', sans-serif;
+}
+
+/** BREAKPOINTS */
+//screen
+$small-device: 420px;
+$vertical-tablet: 767px;
+$medium-device: 1023px;
+$big-tablet: 1079px;
+$laptop: 1200px;
+$large-device: 1399px;
+$extralarge-device: 1500px;
