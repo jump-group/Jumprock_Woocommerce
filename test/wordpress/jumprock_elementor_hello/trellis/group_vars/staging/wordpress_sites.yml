@@ -1,0 +1,34 @@
+# Documentation: https://roots.io/trellis/docs/local-development-setup/
+# `wordpress_sites` options: https://roots.io/trellis/docs/wordpress-sites
+# Define accompanying passwords/secrets in group_vars/development/vault.yml
+
+wordpress_sites:
+  jumprock_elemenor_hello:
+    site_hosts:
+      - canonical: jumprock_elemenor_hello.jumpgroup.it
+    local_path: "../jumprock_elemenor_hello" # path targeting local Bedrock site directory (relative to Ansible root)
+    repo: "git@github.com:jump-group/jumprock_elemenor_hello_wp.git"
+    branch: development
+    admin_email: {{{trellis.admin_email}}}
+    deploy_keep_releases: 1
+    multisite:
+      enabled: false
+      subdomains: false
+    ssl:
+      enabled: true
+      provider: letsencrypt
+      hsts_max_age: 0
+    backup:
+      enabled: true
+      auto: true
+    cache:
+      enabled: true
+      duration: 5s
+    env:
+      wp_mail_smtp_host: 127.0.0.1
+      force_login: true
+      s3_main_region: "eu-central-1"
+      s3_uploads_bucket_url: "https://media.jumpgroup.it/"
+      s3_uploads_bucket_url_base: "media.jumpgroup.it"
+      s3_site_bucket: "jumpguides"
+      app_name: "jumpguides"

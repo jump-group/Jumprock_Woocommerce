@@ -18,3 +18,7 @@ ini_set('display_errors', '1');
 
 // Enable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', false);
+
+// Memcached settings
+Config::define( 'MEMCACHED_HOST', env('MEMCACHED_HOST') ?: 'memcached' );
+Config::define( 'ACF_LITE', env('ACF_LITE') ?? false );

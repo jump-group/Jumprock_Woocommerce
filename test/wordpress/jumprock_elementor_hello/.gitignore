@@ -1,9 +1,17 @@
 # Docker
 docker/db/
 docker/certs/
+docker/nginx/
+docker-compose.yml
 .nvmrc
 node_modules
-yarn.lock
+
+# Trellis
+.secret-fetcher
+.trellis/
+
+# Dropins
+web/app/object-cache.php
 
 # Application
 web/app/plugins/*

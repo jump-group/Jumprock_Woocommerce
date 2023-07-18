@@ -1,0 +1,5 @@
+# Documentation: https://roots.io/trellis/docs/mail/
+php_sendmail_path: "\{{ mailhog_install_dir }}/mhsendmail"
+
+wp_mail_smtp_host: "\{{ site_hosts_canonical | first }}"
+wp_mail_smtp_port: 1025

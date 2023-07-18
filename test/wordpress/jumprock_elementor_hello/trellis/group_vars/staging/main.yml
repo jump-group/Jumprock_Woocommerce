@@ -1,0 +1,17 @@
+mysql_root_password: "\{{ vault_mysql_root_password }}" # Define this variable in group_vars/staging/vault.yml
+
+ferm_input_list:
+  - type: dport_accept
+    dport: [http, https]
+    filename: nginx_accept
+  - type: dport_accept
+    dport: [ssh]
+    saddr: "\{{ ip_whitelist }}"
+  - type: dport_limit
+    dport: [ssh]
+    seconds: 300
+    hits: 20
+  - type: dport_accept
+    dport: [8025]
+  - type: dport_accept
+    dport: [3000]

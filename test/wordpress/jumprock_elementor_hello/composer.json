@@ -23,7 +23,13 @@
         "forum": "https://discourse.roots.io/category/bedrock"
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "composer/installers": true,
+            "koodimonni/composer-dropin-installer": true,
+            "roots/wordpress-core-installer": true
+        },
+        "dropin-installer": "copy"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -67,17 +73,17 @@
             "type": "package",
             "package": {
                 "name": "advanced-custom-fields/advanced-custom-fields-pro",
-                "version": "5.12.3",
+                "version": "6.1.6",
                 "type": "wordpress-plugin",
                 "dist": {
                     "type": "zip",
-                    "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k=b3JkZXJfaWQ9MTYwMDExfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOS0wNS0wOSAxMzowNTozOQ==&t=5.12.3"
+                    "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k=b3JkZXJfaWQ9MTYwMDExfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOS0wNS0wOSAxMzowNTozOQ==&t=6.1.6"
                 }
             }
         }
 ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "jumprock_packages/mandatory":"^2",
         "jumprock_packages/utilities":"^2",
         "jumprock_packages/image-handling":"^2",
@@ -86,7 +92,8 @@
         "jumprock_packages/acf-handling":"^1",
         "wpackagist-plugin/contact-form-7": "^5.1",
         "wpackagist-plugin/elementor":"^3",
-        "wpackagist-plugin/envato-elements":"^2"
+        "wpackagist-plugin/envato-elements":"^2",
+        "koodimonni-language/it_it":"*"
     },
     "require-dev": {
         "jumprock_packages/dev":"^1"
@@ -103,7 +110,10 @@
         "dropin-paths": {
             "web/app/languages/": ["vendor:koodimonni-language"],
             "web/app/languages/plugins/": ["vendor:koodimonni-plugin-language"],
-            "web/app/languages/themes/": ["vendor:koodimonni-theme-language"]
+            "web/app/languages/themes/": ["vendor:koodimonni-theme-language"],
+            "web/app/": [
+                "package:jumprock_packages/mandatory:src/object-cache.php"
+            ]
         },
         "wordpress-install-dir": "web/wp"
     },

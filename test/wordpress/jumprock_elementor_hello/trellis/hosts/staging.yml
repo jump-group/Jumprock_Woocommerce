@@ -1,0 +1,11 @@
+all:
+  hosts:
+    staging:
+      ansible_host:
+  children:
+    staging:
+      hosts:
+        staging:
+    web:
+      hosts:
+        staging:

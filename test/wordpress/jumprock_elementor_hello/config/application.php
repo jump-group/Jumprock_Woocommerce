@@ -114,22 +114,28 @@ if( env('WP_ALLOW_MULTISITE')) {
 /* Login with Google */
 Config::define('WP_GOOGLE_LOGIN_CLIENT_ID', env('WP_GOOGLE_LOGIN_CLIENT_ID'));
 Config::define('WP_GOOGLE_LOGIN_SECRET', env('WP_GOOGLE_LOGIN_SECRET'));
-Config::define('WP_GOOGLE_LOGIN_USER_REGISTRATION', env('WP_GOOGLE_LOGIN_USER_REGISTRATION') ?: true);
+Config::define('WP_GOOGLE_LOGIN_USER_REGISTRATION', env('WP_GOOGLE_LOGIN_USER_REGISTRATION') ?? true);
 
 /*Force login */
-Config::define('FORCE_LOGIN', env('FORCE_LOGIN') ?: false);
+Config::define('FORCE_LOGIN', env('FORCE_LOGIN') ?? false);
 
 /**
  * Custom Settings
  */
 Config::define('AUTOMATIC_UPDATER_DISABLED', true);
-Config::define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
+Config::define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?? false);
 // Disable the plugin and theme file editor in the admin
 Config::define('DISALLOW_FILE_EDIT', true);
 // Disable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', true);
 // Limit the number of post revisions that Wordpress stores (true (default WP): store every revision)
-Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
+Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?? true);
+
+Config::define( 'WP_CACHE', env('WP_CACHE') ?? true );
+Config::define( 'WP_CACHE_KEY_SALT', env('WP_CACHE_KEY_SALT') ?: env('APP_NAME') );
+Config::define( 'MEMCACHED_HOST', env('MEMCACHED_HOST') ?: '127.0.0.1' );
+Config::define( 'MEMCACHED_PORT', env('MEMCACHED_PORT') ?: '11211' );
+Config::define( 'ACF_LITE', env('ACF_LITE') ?? true );
 
 /**
  * Debugging Settings
@@ -154,6 +160,14 @@ if (file_exists($env_config)) {
 }
 
 Config::apply();
+
+
+$memcached_servers = WP_CACHE == false ? [] : [
+    'default' => [
+        'host' => MEMCACHED_HOST,
+        'port' => MEMCACHED_PORT,
+    ],
+];
 
 /**
  * Bootstrap WordPress
