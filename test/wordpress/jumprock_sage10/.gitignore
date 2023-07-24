@@ -51,3 +51,5 @@ web/app/languages/
 node_modules/
 
 .nvmrc
+
+*.lock
