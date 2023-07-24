@@ -1,0 +1,31 @@
+# Documentation: https://roots.io/trellis/docs/local-development-setup/
+# `wordpress_sites` options: https://roots.io/trellis/docs/wordpress-sites
+# Define accompanying passwords/secrets in group_vars/development/vault.yml
+
+wordpress_sites:
+  jumprock_sage:
+    site_hosts:
+      - canonical: jumprock_sage.it
+        redirects:
+          - www.jumprock_sage.it
+    local_path: ../jumprock_sage # path targeting local Bedrock site directory (relative to Ansible root)
+    repo: git@github.com:jump-group/jumprock_sage_wp.git
+    admin_email: {{{trellis.admin_email}}}
+    deploy_keep_releases: 1
+    multisite:
+      enabled: false
+    # ssl:
+    #   enabled: true
+    #   provider: letsencrypt
+    #   hsts_max_age: 0
+    # ssl:
+    #   enabled: true
+    #   provider: manual
+    #   cert: ../../ssl/eurogames.cert
+    #   key: ../../ssl/eurogames.key
+    backup:
+      enabled: true
+      auto: true
+    cache:
+      enabled: true
+      duration: 5s

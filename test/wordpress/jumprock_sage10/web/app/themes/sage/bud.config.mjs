@@ -8,6 +8,12 @@
  * 
  */
 
+import { config } from 'dotenv'
+
+const variables = config({
+    path: '../../../../.env'
+}).parsed;
+
 export default async(app) => {
     app.setPath({
         '@certs': app.path('../../../../docker/certs'),
@@ -74,15 +80,15 @@ export default async(app) => {
     /**
      * Proxy origin (`WP_HOME`)
      */
-    .proxy("https://sage10.test")
+    .proxy(variables.WP_HOME)
 
     /**
      * Development origin
      */
     .serve({
         host: 'localhost:3000',
-        key: app.path('@certs/sage10.test+4-client-key.pem'),
-        cert: app.path('@certs/sage10.test+4-client.pem'),
+        key: app.path('@certs/site.test-key.pem'),
+        cert: app.path('@certs/site.test.pem'),
     })
 
     /**

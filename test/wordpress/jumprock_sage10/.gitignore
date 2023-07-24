@@ -1,6 +1,17 @@
 # Docker
 docker/db/
 docker/certs/
+docker/nginx/
+docker-compose.yml
+.nvmrc
+node_modules
+
+# Trellis
+.secret-fetcher
+.trellis/
+
+# Dropins
+web/app/object-cache.php
 
 # Application
 web/app/plugins/*
@@ -16,6 +27,9 @@ web/app/uploads/*
 # WordPress
 web/wp
 web/.htaccess
+
+# Object Cache
+web/app/object-cache.php
 
 # Dotenv
 .env

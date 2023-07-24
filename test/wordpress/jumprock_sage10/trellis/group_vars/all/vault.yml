@@ -1,0 +1,17 @@
+# Documentation: https://roots.io/trellis/docs/vault/
+vault_mail_password: {{{trellis.vault_mail_password}}}
+
+mailhog_auth_password: {{{trellis.mailhog_auth_password}}}
+
+# Variables to accompany `wordpress_env_defaults` in `group_vars/all/helpers.yml`
+# Note: These values can be overriden by `vault_wordpress_sites.*.env`
+#
+vault_wordpress_env_defaults:
+  s3_uploads_key: {{{trellis.s3_uploads_key}}}
+  s3_uploads_secret: {{{trellis.s3_uploads_secret}}}
+  backup_target_user: {{{trellis.backup_target_user}}}
+  backup_target_pass: {{{trellis.backup_target_pass}}}
+  wp_google_login_client_id: {{{trellis.wp_google_login_client_id}}}
+  wp_google_login_secret: {{{trellis.wp_google_login_secret}}}
+  wp_google_login_user_registration: true
+  passwords: {{{trellis.passwords}}}

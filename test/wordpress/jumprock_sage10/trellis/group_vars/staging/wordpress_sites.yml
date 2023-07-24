@@ -1,0 +1,37 @@
+# Documentation: https://roots.io/trellis/docs/local-development-setup/
+# `wordpress_sites` options: https://roots.io/trellis/docs/wordpress-sites
+# Define accompanying passwords/secrets in group_vars/development/vault.yml
+
+wordpress_sites:
+  jumprock_sage:
+    site_hosts:
+      - canonical: jumprock_sage.sitointest.it
+    local_path: ../jumprock_sage # path targeting local Bedrock site directory (relative to Ansible root)
+    repo: git@github.com:jump-group/jumprock_sage_wp.git
+    branch: development
+    admin_email: web@jumpgroup.it
+    deploy_keep_releases: 2
+    multisite:
+      enabled: false
+      subdomains: false
+    ssl:
+      enabled: true
+      provider: letsencrypt
+      hsts_max_age: 0
+    backup:
+      enabled: true
+      auto: true
+    cache:
+      enabled: false
+      duration: 5s
+      skip_cache_uri: /wp-admin/|/xmlrpc.php|wp-.*.php|/feed/|index.php|sitemap(_index)?.xml|/store.*|/cart.*|/my-account.*|/checkout.*|/addons.*
+      skip_cache_cookie: comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_no_cache|wordpress_logged_in|woocommerce_cart_hash|woocommerce_items_in_cart|wp_woocommerce_session_
+    h5bp: 
+      expires: true
+    env:
+      wp_mail_smtp_host: 127.0.0.1
+      s3_main_region: "eu-central-1"
+      s3_uploads_bucket_url: "https://media.jumpgroup.it/"
+      s3_uploads_bucket_url_base: "media.jumpgroup.it"
+      s3_site_bucket: "jumprock_sage"
+      app_name: "jumprock_sage"

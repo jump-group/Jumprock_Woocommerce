@@ -85,19 +85,23 @@ Config::define('SECURE_AUTH_SALT', env('SECURE_AUTH_SALT'));
 Config::define('LOGGED_IN_SALT', env('LOGGED_IN_SALT'));
 Config::define('NONCE_SALT', env('NONCE_SALT'));
 
+/**
+ * Multisite Settings
+ */
 Config::define('WP_ALLOW_MULTISITE', env('WP_ALLOW_MULTISITE') ?: false);
-/*if (!defined('MULTISITE')) {
-    Config::define('MULTISITE', true);
+if( env('WP_ALLOW_MULTISITE')) {
+    if (!defined('MULTISITE')) {
+        Config::define('MULTISITE', true);
+    }
+    if (!defined('SUBDOMAIN_INSTALL')) {
+        Config::define('SUBDOMAIN_INSTALL', false); // Set to true if using subdomains
+    }
+    Config::define('DOMAIN_CURRENT_SITE', env('DOMAIN_CURRENT_SITE'));
+    Config::define('PATH_CURRENT_SITE', env('PATH_CURRENT_SITE') ?: '/');
+    Config::define('SITE_ID_CURRENT_SITE', env('SITE_ID_CURRENT_SITE') ?: 1);
+    Config::define('BLOG_ID_CURRENT_SITE', env('BLOG_ID_CURRENT_SITE') ?: 1);
+    Config::define('AMF_WORDPRESS_URL', env('DEVURL'));
 }
-if (!defined('SUBDOMAIN_INSTALL')) {
-    Config::define('SUBDOMAIN_INSTALL', false); // Set to true if using subdomains
-}
-Config::define('DOMAIN_CURRENT_SITE', env('DOMAIN_CURRENT_SITE'));
-Config::define('PATH_CURRENT_SITE', env('PATH_CURRENT_SITE') ?: '/');
-Config::define('SITE_ID_CURRENT_SITE', env('SITE_ID_CURRENT_SITE') ?: 1);
-Config::define('BLOG_ID_CURRENT_SITE', env('BLOG_ID_CURRENT_SITE') ?: 1);
-Config::define('AMF_WORDPRESS_URL', env('DEVURL') );
-*/
 
 /* Login with Google */
 Config::define('WP_GOOGLE_LOGIN_CLIENT_ID', env('WP_GOOGLE_LOGIN_CLIENT_ID'));
@@ -113,6 +117,10 @@ Config::define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 Config::define('DISALLOW_FILE_EDIT', true);
 // Disable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', true);
+
+/**
+ * Memcached settings
+ */
 Config::define( 'WP_CACHE', env('WP_CACHE') ?: true );
 Config::define( 'WP_CACHE_KEY_SALT', env('WP_CACHE_KEY_SALT') ?: env('APP_NAME') );
 Config::define( 'MEMCACHED_HOST', env('MEMCACHED_HOST') ?: '127.0.0.1' );
