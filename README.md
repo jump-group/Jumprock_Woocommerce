@@ -5,7 +5,44 @@ La repository comprende:
 - plugin aggiuntivi per estendere le funzionalità di woocommerce;
 - funzionalità di marketing aggiuntive che coinvolgono il flusso di acquisto e la scheda prodotto;
 
----------------
+---
+## Utilizzo
+
+Da terminale posizionarsi nella cartella del progetto su cui si vuole installare il plugin e digitare il seguente comando:
+
+```
+composer require jumprock_packages/jumprock-woocommerce
+```
+
+---
+
+## Development
+
+Da terminale posizionarsi nella cartella di uno dei progetti di test della seguente repository e digitare il seguente comando:
+
+```
+composer require "jumprock_packages/jumprock-woocommerce @dev"
+```
+
+Questo permetterà di installare la versione di sviluppo del plugin e di poterlo modificare in locale in quanto il plugin è installato come symlink.
+
+Assicurarsi che all'interno del file `composer.json` del progetto di test sia presente la repository di tipo `path` che punta alla cartella del plugin, subito dopo la repository di tipo `composer` che puntano a packagist.
+
+```
+"repositories": [
+    ...,
+    {
+        "type": "path",
+        "url": "../../../../Jumprock_Woocommerce",
+        "options": {
+            "symlink": true
+        }
+    },
+    ...
+]
+```
+
+---
 ## Cartella SRC [WIP]
 
 ### **AddOptionPage.php**

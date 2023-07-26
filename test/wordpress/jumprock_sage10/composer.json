@@ -109,7 +109,7 @@
         "wpackagist-plugin/spatie-ray": "^1.7",
         "jumprock_packages/acf-handling": "^1.8",
         "jumprock_packages/image-handling": "^2.0",
-        "jumprock_packages/woocommerce": "@dev"
+        "jumprock_packages/jumprock-woocommerce": "@dev"
     },
     "require-dev": {
         "jumprock_packages/dev": "^1",

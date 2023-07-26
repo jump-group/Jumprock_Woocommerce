@@ -1,5 +1,5 @@
 {
-  "name": "jumprock_packages/woocommerce",
+  "name": "jumprock_packages/jumprock-woocommerce",
   "type": "wordpress-muplugin",
   "description": "Bundle of Woocommerce Depencies for every WP project",
   "keywords": ["wordpress", "plugin", "woocommerce"],

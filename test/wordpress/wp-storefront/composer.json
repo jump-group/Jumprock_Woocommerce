@@ -86,7 +86,7 @@
         "jumprock_packages/marketing":"^2",
         "wpackagist-plugin/contact-form-7": "^5.1",
         "koodimonni-language/it_it":"*",
-        "jumprock_packages/woocommerce": "@dev"
+        "jumprock_packages/jumprock-woocommerce": "@dev"
     },
     "require-dev": {
         "jumprock_packages/dev":"^1"
