@@ -31,6 +31,9 @@ web/app/uploads/*
 web/wp
 web/.htaccess
 
+# Plugins
+web/app/mu-plugins/jumprock-woocommerce
+
 # Dotenv
 .env
 .env.*

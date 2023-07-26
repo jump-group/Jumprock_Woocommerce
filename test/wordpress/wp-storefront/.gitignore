@@ -49,3 +49,6 @@ web/app/languages/
 .DS_Store
 
 *.lock
+
+# Plugins
+web/app/mu-plugins/jumprock-woocommerce

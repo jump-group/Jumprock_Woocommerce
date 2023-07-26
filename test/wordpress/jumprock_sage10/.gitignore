@@ -36,6 +36,9 @@ web/app/object-cache.php
 .env.*
 !.env.example
 
+# Plugins
+web/app/mu-plugins/jumprock-woocommerce
+
 # Composer
 vendor/*
 !vendor/.gitkeep
