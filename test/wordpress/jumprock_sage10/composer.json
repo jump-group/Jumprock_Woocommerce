@@ -108,7 +108,7 @@
         "roots/acorn": "^3.0",
         "wpackagist-plugin/spatie-ray": "^1.7",
         "jumprock_packages/acf-handling": "^1.8",
-        "jumprock_packages/image-handling": "^2.0",
+        "jumprock_packages/image-handling": "^3.0",
         "jumprock_packages/jumprock-woocommerce": "@dev"
     },
     "require-dev": {
