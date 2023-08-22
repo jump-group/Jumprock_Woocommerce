@@ -17,8 +17,65 @@ composer require jumprock_packages/jumprock-woocommerce
 ---
 
 ## Development
+Al fine di poter sviluppare il plugin in locale è necessario installare il plugin in modalità sviluppo. 
 
-Da terminale posizionarsi nella cartella di uno dei progetti di test della seguente repository e digitare il seguente comando:
+#### Introduzione
+
+All'interno delle cartelle di test sono presenti diverse istanze dockerizzate di wordpress. È possibile quindi installare il plugin in una di queste istanze per testare il funzionamento.
+Avviare il progetto come consuetudine.
+
+#### Docker Compose
+
+All'interno dei file `docker-compose.yml` dei progetto di test è necessario aggungere un nuovo volume ai volumes del container *wordpress*.
+Questo deve riportare il mapping della cartella del plugin in locale con la cartella del plugin all'interno del container wordpress.
+Attenzione alle indentazioni
+
+##### Esempio
+```
+/Users/fabiopoliti/dev/jumpgroup/jumprock_packages/:/Users/fabiopoliti/dev/jumpgroup/jumprock_packages/
+```
+
+```
+  wordpress:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: ${APP_NAME}-wordpress
+    networks:
+      - web-network
+    volumes:
+      - ./:/var/www/html:rw,cached
+      - ./docker/config/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - /Users/fabiopoliti/dev/jumpgroup/jumprock_packages/:/Users/fabiopoliti/dev/jumpgroup/jumprock_packages/
+    labels:
+      - traefik.docker.network=web-network
+    restart: unless-stopped
+    depends_on:
+      - mysql
+```
+
+##### Installare il plugin
+
+Assicurarsi che all'interno del file `composer.json` del progetto di test sia presente la repository di tipo `path` che punta alla cartella del plugin, subito dopo la repository di tipo `composer` che puntano a packagist.
+
+##### NOTA BENE
+L'*url* della repository di tipo `path` deve essere assoluto e non relativo. Nell'esempio seguente è stato utilizzato un path assoluto per la repository di tipo `path`:
+
+```
+"repositories": [
+    ...,
+    {
+        "type": "path",
+        "url": "/Users/fabiopoliti/dev/jumpgroup/jumprock_packages/*",
+        "options": {
+            "symlink": true
+        }
+    },
+    ...
+]
+```
+
+Successivamnete, da terminale, posizionarsi nella cartella di uno dei progetti di test della seguente repository e digitare il seguente comando:
 
 ```
 composer require "jumprock_packages/jumprock-woocommerce @dev"
@@ -26,20 +83,13 @@ composer require "jumprock_packages/jumprock-woocommerce @dev"
 
 Questo permetterà di installare la versione di sviluppo del plugin e di poterlo modificare in locale in quanto il plugin è installato come symlink.
 
-Assicurarsi che all'interno del file `composer.json` del progetto di test sia presente la repository di tipo `path` che punta alla cartella del plugin, subito dopo la repository di tipo `composer` che puntano a packagist.
+#### Gitignore Development Plugin Folder
+
+Per evitare di far rilevare la cartella del plugin come non tracciata da git, è necessario aggiungerla alla lista di file e cartelle ignorate da git. Questo è da fare per ogni progetto di test.
 
 ```
-"repositories": [
-    ...,
-    {
-        "type": "path",
-        "url": "../../../../Jumprock_Woocommerce",
-        "options": {
-            "symlink": true
-        }
-    },
-    ...
-]
+# Plugins
+web/app/mu-plugins/jumprock-woocommerce
 ```
 
 ---
