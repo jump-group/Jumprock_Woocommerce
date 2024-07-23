@@ -17,14 +17,20 @@
   ],
   "require": {
     "php": ">=7.4",
-    "wpackagist-plugin/woocommerce":"^8",
-    "wpackagist-plugin/yikes-inc-easy-custom-woocommerce-product-tabs": "^1",
-    "koodimonni-plugin-language/woocommerce-it_it": "^8",
-    "wpackagist-plugin/duracelltomi-google-tag-manager":"^1"
+    "wpackagist-plugin/woocommerce":"9.1.*",
+    "wpackagist-plugin/yikes-inc-easy-custom-woocommerce-product-tabs": "1.8.*",
+    "koodimonni-plugin-language/woocommerce-it_it": "9.1.*",
+    "wpackagist-plugin/duracelltomi-google-tag-manager":"1.20.*"
   },
   "autoload": {
     "psr-4": {
         "JumpGroup\\Woocommerce\\": "src/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "koodimonni/composer-dropin-installer": true,
+      "composer/installers": true
     }
   }
 }
