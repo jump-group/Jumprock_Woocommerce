@@ -17,9 +17,9 @@
   ],
   "require": {
     "php": ">=7.4",
-    "wpackagist-plugin/woocommerce":"8.*",
+    "wpackagist-plugin/woocommerce":"9.*",
     "wpackagist-plugin/yikes-inc-easy-custom-woocommerce-product-tabs": "1.8.*",
-    "koodimonni-plugin-language/woocommerce-it_it": "8.*"
+    "koodimonni-plugin-language/woocommerce-it_it": "9.*"
   },
   "autoload": {
     "psr-4": {
