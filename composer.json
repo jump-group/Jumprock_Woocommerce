@@ -17,9 +17,9 @@
   ],
   "require": {
     "php": ">=7.4",
-    "wpackagist-plugin/woocommerce":"9.3.*",
+    "wpackagist-plugin/woocommerce":"^9.5",
     "wpackagist-plugin/yikes-inc-easy-custom-woocommerce-product-tabs": "1.8.*",
-    "koodimonni-plugin-language/woocommerce-it_it": "9.3.*",
+    "koodimonni-plugin-language/woocommerce-it_it": "^9.5",
     "wpackagist-plugin/duracelltomi-google-tag-manager":"1.20.*"
   },
   "autoload": {
