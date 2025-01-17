@@ -245,16 +245,16 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce",
-            "version": "9.5.1",
-            "version_normalized": "9.5.1.0",
+            "version": "9.5.2",
+            "version_normalized": "9.5.2.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce/",
-                "reference": "tags/9.5.1"
+                "reference": "tags/9.5.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce.9.5.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/woocommerce.9.5.2.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
